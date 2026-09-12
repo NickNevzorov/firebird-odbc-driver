@@ -328,7 +328,6 @@ Firebird::ITransaction* IscConnection::startTransaction()
 		}
 
 		if ( !(tr.transactionExtInit & TRA_nw)
-			&& attachment->isFirebirdVer2_0()
 			&& attachment->getUseLockTimeoutWaitTransactions() )
 		{
 			tpb->insertInt(&status, isc_tpb_lock_timeout, attachment->getUseLockTimeoutWaitTransactions() );
@@ -904,7 +903,7 @@ int IscConnection::buildParamTransaction( char *& string, char boolDeclare )
 	{
 		*text++ = isc_tpb_wait;
 
-		if ( node.lockTimeout && attachment->isFirebirdVer2_0() )
+		if ( node.lockTimeout )
 		{
 			*text++ = isc_tpb_lock_timeout;
 			*text++ = sizeof ( short );
