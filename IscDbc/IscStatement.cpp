@@ -366,7 +366,6 @@ ITransaction* IscStatement::startTransaction()
 			}
 
 			if ( !(tr->transactionExtInit & TRA_nw) 
-				&& connection->attachment->isFirebirdVer2_0()
 				&& connection->attachment->getUseLockTimeoutWaitTransactions() )
 			{
 				tpb->insertInt(&status, isc_tpb_lock_timeout, connection->attachment->getUseLockTimeoutWaitTransactions() );
